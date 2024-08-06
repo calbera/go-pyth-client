@@ -5,4 +5,6 @@ More information about the Pyth price feeds can be found [here](https://docs.pyt
 ## Current Supported Feed Ecosystems
 
 - EVM Stable
+  - All are supported.
 - EVM Beta
+  - If you want to add more feeds, please follow the pattern in evm_stable.go.
