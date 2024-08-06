@@ -1,16 +1,16 @@
-package client
+package feeds
 
 // Enum for Pyth supported price feed ecosystems.
-type FeedVersion int8
+type Version int8
 
 const (
-	InvalidFeed FeedVersion = iota - 1
+	InvalidFeed Version = iota - 1
 	EVMStable
 	EVMBeta
 	// ...
 )
 
-func ToFeedVersion(ecosystem string) (FeedVersion, error) {
+func ToVersion(ecosystem string) (Version, error) {
 	switch ecosystem {
 	case "EVM-Stable", "EVM Stable", "evm stable", "evm-stable":
 		return EVMStable, nil
@@ -21,7 +21,7 @@ func ToFeedVersion(ecosystem string) (FeedVersion, error) {
 	}
 }
 
-func MustGetPriceFeedID(version FeedVersion, ticker string) string {
+func MustGetPriceFeedID(version Version, ticker string) string {
 	switch version {
 	case EVMStable:
 		return EVMStableFeedsToIDs[ticker]
@@ -32,7 +32,7 @@ func MustGetPriceFeedID(version FeedVersion, ticker string) string {
 	}
 }
 
-func MustGetPriceFeed(version FeedVersion, id string) string {
+func MustGetPriceFeed(version Version, id string) string {
 	switch version {
 	case EVMStable:
 		return EVMStableIDsToFeeds[id]

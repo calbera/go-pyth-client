@@ -179,3 +179,5 @@ linters:
     - varnamelen
     - wrapcheck
     - wsl
+    - nilnil
+    - nlreturn

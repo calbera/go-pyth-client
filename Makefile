@@ -34,7 +34,7 @@ endif
 # Build all services
 build:
 	@echo Building go-pyth-client
-	@go build -o bin/go-pyth-client feeds.go
+	@go build -o bin/ ./...
 
 # Generate solidity bindings for the Pyth EVM contracts
 bindings:
