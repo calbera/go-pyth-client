@@ -1,7 +1,5 @@
 package client
 
-import "errors"
-
 // Enum for Pyth supported price feed ecosystems.
 type FeedVersion int8
 
@@ -19,7 +17,7 @@ func ToFeedVersion(ecosystem string) (FeedVersion, error) {
 	case "EVM-Beta", "EVM Beta", "evm beta", "evm-beta":
 		return EVMBeta, nil
 	default:
-		return InvalidFeed, errors.New("feed version not supported")
+		return InvalidFeed, ErrFeedNotSupported
 	}
 }
 
@@ -30,7 +28,7 @@ func MustGetPriceFeedID(version FeedVersion, ticker string) string {
 	case EVMBeta:
 		return EVMBetaFeedsToIDs[ticker]
 	default:
-		panic("feed version not supported")
+		panic(ErrFeedNotSupported)
 	}
 }
 
@@ -41,7 +39,7 @@ func MustGetPriceFeed(version FeedVersion, id string) string {
 	case EVMBeta:
 		return EVMBetaIDsToFeeds[id]
 	default:
-		panic("feed version not supported")
+		panic(ErrFeedNotSupported)
 	}
 }
 
