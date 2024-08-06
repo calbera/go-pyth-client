@@ -2,7 +2,7 @@ package client
 
 import "errors"
 
-// Enum for Pyth supported price feed ecosystems
+// Enum for Pyth supported price feed ecosystems.
 type FeedVersion int8
 
 const (
@@ -47,7 +47,7 @@ func MustGetPriceFeed(version FeedVersion, id string) string {
 
 // Reference: https://pyth.network/developers/price-feed-ids
 
-// Pyth EVM Stable Price Feeds
+// Pyth EVM Stable Price Feeds.
 var (
 	EVMStableFeedsToIDs = map[string]string{
 		"BTC/USD":  "e62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43",
@@ -68,7 +68,7 @@ var (
 	}
 )
 
-// Pyth EVM Beta Price Feeds
+// Pyth EVM Beta Price Feeds.
 var (
 	EVMBetaFeedsToIDs = map[string]string{
 		"BTC/USD":  "f9c0172ba10dfa4d19088d94f5bf61d3b54d5bd7483a322a982e1373ee8ea31b",

@@ -6,7 +6,7 @@
 
 # Default target
 .DEFAULT_GOAL := build
-all: build
+all: tidy bindings build format lint test
 
 MODULES := $(shell find . -type f -name 'go.mod' -exec dirname {} \;)
 
@@ -64,12 +64,12 @@ golangci-install:
 golangci:
 	@$(MAKE) golangci-install
 	@echo "--> Running linter"
-	@go list -f '{{.Dir}}/...' -m | xargs golangci-lint run  --timeout=10m --concurrency 8 -v 
+	@go list -f '{{.Dir}}/...' -m | xargs go run github.com/golangci/golangci-lint/cmd/golangci-lint run --config ./.golangci.yml --timeout=10m --concurrency 8 
 
 golangci-fix:
 	@$(MAKE) golangci-install
 	@echo "--> Running linter"
-	@go list -f '{{.Dir}}/...' -m | xargs golangci-lint run  --timeout=10m --fix --concurrency 8 -v 
+	@go list -f '{{.Dir}}/...' -m | xargs go run github.com/golangci/golangci-lint/cmd/golangci-lint run --config ./.golangci.yml --timeout=10m --fix --concurrency 8 
 
 #################
 #     gosec     #

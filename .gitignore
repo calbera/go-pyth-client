@@ -29,8 +29,6 @@ go.work.sum
 .vscode/
 .DS_Store
 
-####### Foundry #########
-**/abis/
 
 # Ignores development broadcast logs
 !/broadcast
