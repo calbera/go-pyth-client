@@ -5,8 +5,8 @@
 ########################################################
 
 # Default target
-.DEFAULT_GOAL := build
-all: tidy bindings build format lint test
+.DEFAULT_GOAL := all
+all: tidy bindings format lint test
 
 MODULES := $(shell find . -type f -name 'go.mod' -exec dirname {} \;)
 
@@ -30,11 +30,6 @@ endif
 ########################################################
 #                       Building                       #
 ########################################################
-
-# Build all services
-build:
-	@echo Building go-pyth-client
-	@go build -o bin/ ./...
 
 # Generate solidity bindings for the Pyth EVM contracts
 bindings:
@@ -100,14 +95,11 @@ test-go:
 test:
 	@$(MAKE) test-go
 
-test-go-cover: 
+test-cover: 
 	@export GOCOVERDIR=$(shell pwd)
 	@$(MAKE) install-ginkgo
 	@ginkgo -r --vv --randomize-all --fail-on-pending --trace \
 		--cover --coverprofile "coverage-go.txt" --covermode atomic ./...
-
-test-cover:
-	@$(MAKE) test-go-cover
 
 ########################################################
 #                        Dependency                    #

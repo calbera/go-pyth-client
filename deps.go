@@ -12,4 +12,5 @@ import (
 	_ "github.com/cosmos/gosec/v2/cmd/gosec"
 	_ "github.com/ethereum/go-ethereum/cmd/abigen"
 	_ "github.com/golangci/golangci-lint/cmd/golangci-lint"
+	_ "github.com/onsi/ginkgo/v2/ginkgo"
 )

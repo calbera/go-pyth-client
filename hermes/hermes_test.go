@@ -25,11 +25,8 @@ var testConfig = hermes.Config{
 }
 
 func setUp() (context.Context, *hermes.Client) {
-	loggerTest := slog.Default()
-	ctx := context.Background()
-
 	// set up Pyth client and subscribe
-	pythClient, _ := hermes.NewClient(&testConfig, loggerTest)
+	pythClient, _ := hermes.NewClient(&testConfig, slog.Default())
 
-	return ctx, pythClient
+	return context.Background(), pythClient
 }

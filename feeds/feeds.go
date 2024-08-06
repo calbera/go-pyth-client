@@ -1,5 +1,7 @@
 package feeds
 
+import "github.com/calbera/go-pyth-client/types"
+
 // Enum for Pyth supported price feed ecosystems.
 type Version int8
 
@@ -17,7 +19,7 @@ func ToVersion(ecosystem string) (Version, error) {
 	case "EVM-Beta", "EVM Beta", "evm beta", "evm-beta":
 		return EVMBeta, nil
 	default:
-		return InvalidFeed, ErrFeedNotSupported
+		return InvalidFeed, types.ErrFeedNotSupported
 	}
 }
 
@@ -28,7 +30,7 @@ func MustGetPriceFeedID(version Version, ticker string) string {
 	case EVMBeta:
 		return EVMBetaFeedsToIDs[ticker]
 	default:
-		panic(ErrFeedNotSupported)
+		panic(types.ErrFeedNotSupported)
 	}
 }
 
@@ -39,7 +41,7 @@ func MustGetPriceFeed(version Version, id string) string {
 	case EVMBeta:
 		return EVMBetaIDsToFeeds[id]
 	default:
-		panic(ErrFeedNotSupported)
+		panic(types.ErrFeedNotSupported)
 	}
 }
 
