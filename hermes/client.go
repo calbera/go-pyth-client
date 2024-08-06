@@ -12,7 +12,7 @@ import (
 	"github.com/calbera/go-pyth-client/types"
 )
 
-// Client is a client for the Pythnet Hermes API (https://hermes.pyth.network/docs)
+// Client is a client for the Pyth Hermes API (https://hermes.pyth.network/docs)
 type Client struct {
 	// Config for Pyth and HTTP calls.
 	cfg *Config
@@ -33,7 +33,7 @@ type Client struct {
 	subscribeOnce sync.Once
 }
 
-// NewClient creates a client for the Pythnet Hermes API.
+// NewClient creates a client for the Pyth Hermes API.
 func NewClient(cfg *Config, logger retryablehttp.LeveledLogger) (*Client, error) {
 	// Ensure the given configuration is valid.
 	if err := cfg.Validate(); err != nil {
@@ -67,7 +67,7 @@ func NewClient(cfg *Config, logger retryablehttp.LeveledLogger) (*Client, error)
 	}, nil
 }
 
-// Shutdown gracefully shuts down the Pythnet Hermes client.
+// Shutdown gracefully shuts down the Pyth Hermes client.
 func (c *Client) Shutdown() {
 	c.client.HTTPClient.CloseIdleConnections()
 }

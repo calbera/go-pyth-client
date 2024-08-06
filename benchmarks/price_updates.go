@@ -11,6 +11,9 @@ import (
 	"github.com/calbera/go-pyth-client/feeds"
 )
 
+// GetHistoricalPriceUpdatesSync queries the `v1/updates/price/{timestamp}` endpoint for all price
+// feed IDs together. Takes the price feed keys (uses corresponding Pyth feed ID). Returns the Pyth
+// PriceFeed struct and the price feed update data for each pair.
 func (c *Client) GetHistoricalPriceUpdatesSync(
 	_ context.Context, timestamp time.Time, priceFeeds ...string,
 ) (map[string]*apyth.PythStructsPriceFeed, error) {

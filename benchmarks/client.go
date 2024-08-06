@@ -36,7 +36,7 @@ func NewClient(cfg *Config, logger retryablehttp.LeveledLogger) (*Client, error)
 	}, nil
 }
 
-// Shutdown gracefully shuts down the Pythnet Hermes client.
+// Shutdown gracefully shuts down the Pyth Benchmarks client.
 func (c *Client) Shutdown() {
 	c.client.HTTPClient.CloseIdleConnections()
 }
