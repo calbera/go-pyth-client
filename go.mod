@@ -7,7 +7,7 @@ require (
 	github.com/ethereum/go-ethereum v1.14.7
 	github.com/golangci/golangci-lint v1.59.1
 	github.com/hashicorp/go-retryablehttp v0.7.4
-	github.com/onsi/ginkgo/v2 v2.17.3
+	github.com/onsi/ginkgo/v2 v2.19.1
 	github.com/r3labs/sse/v2 v2.10.0
 	github.com/stretchr/testify v1.9.0
 	golang.org/x/sync v0.7.0
@@ -259,7 +259,7 @@ require (
 	golang.org/x/text v0.16.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	golang.org/x/tools v0.22.0 // indirect
-	google.golang.org/protobuf v1.33.0 // indirect
+	google.golang.org/protobuf v1.34.1 // indirect
 	gopkg.in/cenkalti/backoff.v1 v1.1.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1 // indirect

@@ -2,6 +2,7 @@ package benchmarks_test
 
 import (
 	"context"
+	"fmt"
 	"math"
 	"testing"
 	"time"
@@ -25,11 +26,14 @@ func TestGetPriceUpdatesSync(t *testing.T) {
 	for _, pair := range testPairs {
 		assert.Contains(t, prices, pair)
 
+		expected, err := common.ParseHexOrString(feeds.MustGetPriceFeedID(feeds.EVMStable, pair))
+		assert.Nil(t, err)
+
 		// Correct Price Feed ID returned
 		assert.Equal(
 			t,
-			prices[pair].Id[:],
-			common.Hex2Bytes(feeds.MustGetPriceFeedID(feeds.EVMStable, pair)),
+			prices[pair].Id[:], expected,
+			fmt.Sprintf("Price feed ID for %s is incorrect", pair),
 		)
 
 		// Valid, non-zero prices returned

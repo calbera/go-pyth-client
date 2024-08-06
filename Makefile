@@ -88,12 +88,9 @@ install-ginkgo:
 	@echo "Installing ginkgo..."
 	@go install github.com/onsi/ginkgo/v2/ginkgo@latest
 
-test-go:
+test:
 	@$(MAKE) install-ginkgo
 	@ginkgo -r --vv --randomize-all --fail-on-pending -trace ./...
-
-test:
-	@$(MAKE) test-go
 
 test-cover: 
 	@export GOCOVERDIR=$(shell pwd)
