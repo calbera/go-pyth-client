@@ -1,31 +1,10 @@
 #!/usr/bin/make -f
 
-########################################################
-#                       Makefile                       #
-########################################################
-
 # Default target
 .DEFAULT_GOAL := all
 all: tidy bindings format lint test
 
 MODULES := $(shell find . -type f -name 'go.mod' -exec dirname {} \;)
-
-########################################################
-#                         Setup                        #
-########################################################
-
-# Generate versioning information
-TAG_COMMIT := $(shell git rev-list --abbrev-commit --tags --max-count=1)
-TAG := $(shell git describe --abbrev=0 --tags ${TAG_COMMIT} 2>/dev/null || true)
-COMMIT := $(shell git rev-parse --short HEAD)
-DATE := $(shell git log -1 --format=%cd --date=format:"%Y%m%d")
-VERSION := $(TAG:v%=%)
-ifneq ($(COMMIT), $(TAG_COMMIT))
-    VERSION := $(VERSION)-next-$(COMMIT)-$(DATE)
-endif
-ifneq ($(shell git status --porcelain),)
-    VERSION := $(VERSION)-dirty
-endif
 
 ########################################################
 #                       Building                       #
@@ -101,11 +80,6 @@ test-cover:
 ########################################################
 #                        Dependency                    #
 ########################################################
-
-repo-rinse: |
-	git submodule foreach --recursive git clean -xfd
-	git submodule foreach --recursive git reset --hard
-	git submodule update --init --recursive
 
 tidy: |
 	@for module in $(MODULES); do \
