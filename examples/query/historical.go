@@ -12,7 +12,7 @@ import (
 // Requires a Pyth client to fetch prices from Pyth Benchmarks API. Assumes that all required
 // feeds to be queried for `oracleFeeds` are in the `uniqueFeeds` slice.
 func GetAllPricesAt(
-	ctx context.Context, timestamp time.Time, pythClient client.Benchmarks, qs *lib.QuerySettings,
+	ctx context.Context, timestamp time.Time, pythClient client.Benchmarks, qs *Settings,
 	pairIndexes map[string]uint64, oracleFeeds map[string][]string, uniqueFeeds []string,
 ) (lib.PriceUpdates, error) {
 	// Query Pyth for the unique price feeds necessary
@@ -43,31 +43,29 @@ func GetAllPricesAt(
 			)
 
 		case lib.Feed_TRIANGULAR:
-			baseP := lib.GetPriceUpdateFromPythStructsPriceFeed(
+			base := lib.GetPriceUpdateFromPythStructsPriceFeed(
 				priceData[priceFeeds[0]], pairIndex, qs.UseEma, qs.DesiredPrecision,
 			)
-			quoteP := lib.GetPriceUpdateFromPythStructsPriceFeed(
+			quote := lib.GetPriceUpdateFromPythStructsPriceFeed(
 				priceData[priceFeeds[1]], pairIndex, qs.UseEma, qs.DesiredPrecision,
 			)
 
 			// Use the older of the two as the timestamp.
 			var timestamp uint64
-			if baseP.TimeStamp <= quoteP.TimeStamp {
-				timestamp = baseP.TimeStamp
+			if base.TimeStamp <= quote.TimeStamp {
+				timestamp = base.TimeStamp
 			} else {
-				timestamp = quoteP.TimeStamp
+				timestamp = quote.TimeStamp
 			}
 
 			allPairPrices[pairIndex] = &lib.PriceUpdate{
 				PairIndex: pairIndex,
-				Price: lib.Price(lib.CalculateTriangularPrice(
-					int64(baseP.Price), int64(quoteP.Price), qs.DesiredPrecision,
-				)),
-				Conf: lib.Price(lib.CalculateTriangularConf(
-					int64(baseP.Price), int64(quoteP.Price),
-					int64(baseP.Conf), int64(quoteP.Conf),
-					qs.DesiredPrecision,
-				)),
+				Price: lib.CalculateTriangularPrice(
+					base.Price, quote.Price, qs.DesiredPrecision,
+				),
+				Conf: lib.CalculateTriangularConf(
+					base.Price, quote.Price, base.Conf, quote.Conf, qs.DesiredPrecision,
+				),
 				TimeStamp: timestamp,
 			}
 

@@ -11,7 +11,7 @@ func TestNormalizeToPrecision(t *testing.T) {
 		i         int64
 		decimals  int
 		precision int
-		expected  int64
+		expected  lib.Price
 	}{
 		{100000, 6, 3, 100},
 		{100, 3, 6, 100000},
@@ -28,9 +28,9 @@ func TestNormalizeToPrecision(t *testing.T) {
 
 func TestCalculateTriangularPrice(t *testing.T) {
 	tests := []struct {
-		baseP, quoteP    int64
+		baseP, quoteP    lib.Price
 		desiredPrecision int
-		expected         int64
+		expected         lib.Price
 	}{
 		{3e10, 4e10, 10, 3e10 / 4},
 		{1000, 10000, 10, 1e10 / 10},
@@ -51,9 +51,9 @@ func TestCalculateTriangularPrice(t *testing.T) {
 
 func TestCalculateTriangularConf(t *testing.T) {
 	tests := []struct {
-		baseP, quoteP, baseC, quoteC int64
+		baseP, quoteP, baseC, quoteC lib.Price
 		desiredPrecision             int
-		expected                     int64
+		expected                     lib.Price
 	}{
 		{3e10, 4e10, 1e10, 1e10, 10, 5e10 / 16},
 		{1000, 10000, 1, 5, 10, 1118033},
