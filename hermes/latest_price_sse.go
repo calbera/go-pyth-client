@@ -3,6 +3,7 @@ package hermes
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"math/rand"
 	"time"
@@ -43,7 +44,7 @@ func (c *Client) GetCachedLatestPriceUpdates(
 ) (map[string]*types.LatestPriceData, error) {
 	// Validate parameters
 	if len(priceFeeds) == 0 {
-		return nil, fmt.Errorf("zero length of price feeds is an invalid input")
+		return nil, errors.New("zero length of price feeds is an invalid input")
 	}
 
 	// Wait for the ready signal
